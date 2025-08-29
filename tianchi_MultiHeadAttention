@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.nn.functional as F  # 添加缺失的导入
+import torch.nn.functional as F  
 from gensim.models import Word2Vec
 from torch.utils.data import Dataset, DataLoader
 from collections import defaultdict
@@ -298,7 +298,7 @@ class CNN_MultiheadAttention_LSTM_Model(nn.Module):
         attention_weights = self.attention(lstm_out)  # [batch_size, seq_len, 1]
         attention_weights = torch.softmax(attention_weights, dim=1)  # [batch_size, seq_len, 1]
 
-        # 加权求和而不是取最后一个时间步
+        # 加权求和
         attention_out = torch.sum(lstm_out * attention_weights, dim=1)  # [batch_size, hidden_dim]
 
         # 应用Dropout
